@@ -26,6 +26,11 @@ namespace CrocamedelianExaction
         {
             Log.Error("[CrE] " + ((o != null) ? o.ToString() : null));
         }
+
+
+
+
+
     }
 
 }

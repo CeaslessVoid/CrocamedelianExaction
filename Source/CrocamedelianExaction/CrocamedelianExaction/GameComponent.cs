@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,17 @@ namespace CrocamedelianExaction
             CrE_GameComponent.CrE_Points += points; // Just use negative numbers for decrease
         }
 
-        public static int CrE_Points;
+        // Checking if valid gender pawn is available in base
+        public static void CheckValidPawnBase()
+        {
+            if (Current.Game.AnyPlayerHomeMap == null) { return; }
+
+
+        }
+
+        public static int CrE_Points; // CrE Points
+
+        public static List<Pawn> AvaiablePawnForCrE; // All avaialbe pawns for base events
 
 
     }
