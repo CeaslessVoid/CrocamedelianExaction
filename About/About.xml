@@ -13,6 +13,12 @@
 			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
 		</li>
 		<li>
+			<packageId>mlie.morefactioninteraction</packageId>
+			<displayName>More Faction Interaction</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2379076640</steamWorkshopUrl>
+			<downloadUrl>https://github.com/emipa606/MoreFactionInteraction/releases/latest</downloadUrl>
+		</li>
+		<li>
 			<packageId>rim.job.world</packageId>
 			<displayName>RimJobWorld</displayName>
 			<downloadUrl>https://gitgud.io/Ed86/rjw</downloadUrl>
@@ -20,9 +26,9 @@
 	</modDependencies>
 	<loadAfter>
 		<li>brrainz.harmony</li>
-		<li>VanillaExpanded.VEE</li>
+		<li>mlie.morefactioninteraction</li>
 		<li>rim.job.world</li>
 	</loadAfter>
 
-	<description>This is not a full mod, just may be part of a mod in the future. </description>
+	<description>Adds alot of mechanics to RJW that require faction interaction. Have Fun. THIS IS A NSFW mod, if you are not above the age of 18, cannot understand the difrrence between reality and fiction, and is digusted by 'sex' DO NOT DOWNLOAD. </description>
 </ModMetaData>

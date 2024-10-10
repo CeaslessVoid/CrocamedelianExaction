@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CrocamedelianKidnap")]
+[assembly: AssemblyTitle("CrocamedelianExaction")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CrocamedelianKidnap")]
+[assembly: AssemblyProduct("CrocamedelianExaction")]
 [assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d1fbfe4f-434d-4ef8-a43b-a00e87142b18")]
+[assembly: Guid("19f384e5-e084-47c0-88dc-2ecdabf0f8d6")]
 
 // Version information for an assembly consists of the following four values:
 //

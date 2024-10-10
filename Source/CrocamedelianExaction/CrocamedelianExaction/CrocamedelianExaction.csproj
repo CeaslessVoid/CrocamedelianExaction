@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D1FBFE4F-434D-4EF8-A43B-A00E87142B18}</ProjectGuid>
+    <ProjectGuid>{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CrocamedelianKidnap</RootNamespace>
-    <AssemblyName>CrocamedelianKidnap</AssemblyName>
+    <RootNamespace>CrocamedelianExaction</RootNamespace>
+    <AssemblyName>CrocamedelianExaction</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -40,6 +40,9 @@
     <Reference Include="HarmonyMod">
       <HintPath>..\..\..\..\..\..\..\workshop\content\294100\2009463077\1.4\Assemblies\HarmonyMod.dll</HintPath>
     </Reference>
+    <Reference Include="MoreFactionInteraction">
+      <HintPath>..\..\..\..\..\..\..\workshop\content\294100\2379076640\1.5\Assemblies\MoreFactionInteraction.dll</HintPath>
+    </Reference>
     <Reference Include="RJW">
       <HintPath>..\..\..\..\rjw\1.5\Assemblies\RJW.dll</HintPath>
     </Reference>
@@ -59,7 +62,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="Debug.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="GameComponent.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
