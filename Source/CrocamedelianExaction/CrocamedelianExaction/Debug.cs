@@ -12,12 +12,18 @@ namespace CrocamedelianExaction
 {
     public static class Debug
     {
-        [DebugAction(null, null, false, false, false, false, 0, false, category = "Crocamedelian's Exaction", name = "Print Current Points", requiresRoyalty = false, requiresIdeology = false, requiresBiotech = false, actionType = 0, allowedGameStates = LudeonTK.AllowedGameStates.Playing)]
+        [DebugAction(null, null, false, false, false, false, 0, false, category = "Exaction", name = "Print Current Points", requiresRoyalty = false, requiresIdeology = false, requiresBiotech = false, actionType = 0, allowedGameStates = LudeonTK.AllowedGameStates.Playing)]
         private static void PrintCrEPoints() // Prints current CrE points
         {
             Util.Msg(CrE_GameComponent.CrE_Points);
         }
 
-        private const string CATEGORY = "Crocamedelian's Exaction";
+        [DebugAction(null, null, false, false, false, false, 0, false, category = "Exaction", name = "Print Random Valid Pawn", requiresRoyalty = false, requiresIdeology = false, requiresBiotech = false, actionType = 0, allowedGameStates = LudeonTK.AllowedGameStates.Playing)]
+        private static void PrintRandomValidPawn() // Prints current CrE points
+        {
+            Util.Msg(CrE_GameComponent.GetRandomPawnForEvent());
+        }
+
+        private const string CATEGORY = "Exaction";
     }
 }

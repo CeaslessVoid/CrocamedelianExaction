@@ -34,18 +34,25 @@ namespace CrocamedelianExaction
             CrE_GameComponent.CrE_Points += points; // Just use negative numbers for decrease
         }
 
-        // Checking if valid gender pawn is available in base
-        public static void CheckValidPawnBase()
-        {
-            if (Current.Game.AnyPlayerHomeMap == null) { return; }
-
-
-        }
 
         public static int CrE_Points; // CrE Points
 
-        public static List<Pawn> AvaiablePawnForCrE; // All avaialbe pawns for base events
+        public static Pawn GetRandomPawnForEvent()
+        {
+            List<Pawn> allPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists.ToList();
 
+            // Filter based on settings
+            IEnumerable<Pawn> validPawns = allPawns.Where(pawn =>
+                (Settings.CrE_Male || pawn.gender != Gender.Male) &&
+                (Settings.CrE_Female || pawn.gender != Gender.Female));
+
+            if (!validPawns.Any())
+            {
+                return null;
+            }
+
+            return validPawns.RandomElement();
+        }
 
     }
 
