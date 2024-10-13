@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
+//using MoreFactionInteraction;
+using RimWorld.Planet;
 
 namespace CrocamedelianExaction
 {
@@ -15,11 +17,23 @@ namespace CrocamedelianExaction
     {
         public static bool Do()
         {
-            QuestScriptDef named = DefDatabase<QuestScriptDef>.GetNamed("CrE_PawnLend", true);
-            float num = StorytellerUtility.DefaultThreatPointsNow(Current.Game.AnyPlayerHomeMap);
-            QuestUtility.SendLetterQuestAvailable(QuestUtility.GenerateQuestAndMakeAvailable(named, num));
+
+            IncidentDef incidentDef = DefDatabase<IncidentDef>.GetNamed("CrE_PawnLend", true);
+            //IncidentDef incidentDef = DefDatabase<IncidentDef>.GetNamed("MFI_PirateExtortion", true);
+
+            // Create incident parameters
+            var incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, Find.AnyPlayerHomeMap);
+            incidentParms.forced = true;
+            incidentParms.target = Find.AnyPlayerHomeMap;
+
+            // Try to execute the incident
+            bool result = incidentDef.Worker.TryExecute(incidentParms);
+
+
             return true;
+
         }
+
     }
 
 }

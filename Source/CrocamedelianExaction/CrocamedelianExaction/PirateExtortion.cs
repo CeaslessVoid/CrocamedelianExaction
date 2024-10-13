@@ -1,5 +1,8 @@
 ﻿using HarmonyLib;
 using LudeonTK;
+using MoreFactionInteraction;
+using RimWorld;
+using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +10,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
-using RimWorld;
 
 namespace CrocamedelianExaction
 {
-    [DefOf]
-    public static class CrE_DefOf
-    {
-        public static IncidentDef CrE_PawnLend;
-    }
-
+    
 }

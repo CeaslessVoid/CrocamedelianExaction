@@ -2,14 +2,14 @@
 <Defs>
    <IncidentDef>
     <defName>CrE_PawnLend</defName>
-    <label>pirate extortion</label>
+    <label>Pirate Pawn extortion</label>
     <category>ThreatSmall</category>
     <targetTags>
       <li>Map_PlayerHome</li>
     </targetTags>
-    <workerClass>MoreFactionInteraction.IncidentWorker_Extortion</workerClass>
+    <workerClass>CrocamedelianExaction.IncidentWorker_CrE_Extortion</workerClass>
     <letterLabel>Pirate fee demand</letterLabel>
-    <letterDef>ExtortionDemand</letterDef>
+    <letterDef>CrEExtortionDemand</letterDef>
     <baseChance>1.25</baseChance>
     <earliestDay>30</earliestDay>
     <minRefireDays>15</minRefireDays>

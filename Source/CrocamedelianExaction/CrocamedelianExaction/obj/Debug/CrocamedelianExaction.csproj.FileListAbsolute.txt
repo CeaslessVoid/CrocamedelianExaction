@@ -74,3 +74,5 @@ C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\CrocamedelianExactio
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\CrocamedelianExaction\Source\CrocamedelianExaction\CrocamedelianExaction\obj\Debug\CrocamedelianExaction.pdb
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\CrocamedelianExaction\Source\CrocamedelianExaction\CrocamedelianExaction\bin\Debug\RJW.dll
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\CrocamedelianExaction\Source\CrocamedelianExaction\CrocamedelianExaction\bin\Debug\0MultiplayerAPI.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\CrocamedelianExaction\Source\CrocamedelianExaction\CrocamedelianExaction\bin\Debug\MoreFactionInteraction.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\CrocamedelianExaction\Source\CrocamedelianExaction\CrocamedelianExaction\bin\Debug\VersionFromManifest.dll

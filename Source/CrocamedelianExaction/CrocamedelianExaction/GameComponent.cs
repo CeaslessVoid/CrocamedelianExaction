@@ -54,6 +54,14 @@ namespace CrocamedelianExaction
             return validPawns.RandomElement();
         }
 
+        public override void ExposeData()
+        {
+            base.ExposeData();
+
+            Scribe_Values.Look(ref CrE_Points, "CrE_Points", defaultValue: Settings.InitalCrEPoints, true);
+
+        }
+
     }
 
 }

@@ -19,5 +19,6 @@ namespace CrocamedelianExaction
         }
 
         public static Harmony HarmonyInstance = new Harmony("Crocamedelian.Exaction");
+
     }
 }

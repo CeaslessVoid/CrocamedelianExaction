@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CrocamedelianExaction</RootNamespace>
     <AssemblyName>CrocamedelianExaction</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefOf.cs" />
-    <Compile Include="Letters.cs" />
+    <Compile Include="PirateExtortion.cs" />
     <Compile Include="Temp.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Debug.cs" />
