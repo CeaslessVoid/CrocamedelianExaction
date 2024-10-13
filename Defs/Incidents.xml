@@ -1,23 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-   <IncidentDef>
-    <defName>CrE_PawnLend</defName>
-    <label>Pirate Pawn extortion</label>
-    <category>ThreatSmall</category>
+  <IncidentDef>
+    <defName>CrE_PiratePawn_Extort</defName>
+    <label>diplomatic marriage</label>
+    <category>Misc</category>
     <targetTags>
-      <li>Map_PlayerHome</li>
+      <li>World</li>
     </targetTags>
-    <workerClass>CrocamedelianExaction.IncidentWorker_CrE_Extortion</workerClass>
-    <letterLabel>Pirate fee demand</letterLabel>
-    <letterDef>CrEExtortionDemand</letterDef>
-    <baseChance>1.25</baseChance>
-    <earliestDay>30</earliestDay>
-    <minRefireDays>15</minRefireDays>
-    <chanceFactorByPopulationCurve>
-      <points>
-        <li>(2,0)</li>
-        <li>(7,1)</li>
-      </points>
-    </chanceFactorByPopulationCurve>
+    <workerClass>CrocamedelianExaction.IncidentWorker_CrEDiplomaticMarriage</workerClass>
+    <letterLabel>CrE Temp</letterLabel>
+    <letterDef>CrE_PiratePawn_Extort_Letter</letterDef>
+    <baseChance>0.5</baseChance>
+    <earliestDay>15</earliestDay>
+    <minRefireDays>30</minRefireDays>
   </IncidentDef>
 </Defs>

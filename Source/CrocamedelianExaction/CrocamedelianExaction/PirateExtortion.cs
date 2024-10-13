@@ -1,6 +1,8 @@
 ﻿using HarmonyLib;
 using LudeonTK;
 using MoreFactionInteraction;
+using MoreFactionInteraction.General;
+using MoreFactionInteraction.MoreFactionWar;
 using RimWorld;
 using RimWorld.Planet;
 using System;
@@ -13,5 +15,202 @@ using Verse;
 
 namespace CrocamedelianExaction
 {
-    
+    public class IncidentWorker_CrEDiplomaticMarriage : IncidentWorker_DiplomaticMarriage
+    {
+        private const int TimeoutTicks = GenDate.TicksPerDay;
+        private Pawn betrothed;
+        private Pawn marriageSeeker;
+
+        public override float BaseChanceThisGame => Math.Max(0.01f,
+            base.BaseChanceThisGame - StorytellerUtilityPopulation.PopulationIntent);
+
+        public override bool CanFireNowSub(IncidentParms parms)
+        {
+            return base.CanFireNowSub(parms) && TryFindMarriageSeeker(out marriageSeeker)
+                                             && TryFindBetrothed(out betrothed)
+                                             && !this.IsScenarioBlocked();
+        }
+
+        public override bool TryExecuteWorker(IncidentParms parms)
+        {
+            if (!TryFindMarriageSeeker(out marriageSeeker))
+            {
+                if (Prefs.LogVerbose)
+                {
+                    Log.Warning("no marriageseeker");
+                }
+
+                return false;
+            }
+
+            if (!TryFindBetrothed(out betrothed))
+            {
+                if (Prefs.LogVerbose)
+                {
+                    Log.Warning("no betrothed");
+                }
+
+                return false;
+            }
+
+            var text = "MFI_DiplomaticMarriage"
+                .Translate(marriageSeeker.LabelShort, betrothed.LabelShort, marriageSeeker.Faction.Name)
+                .AdjustedFor(marriageSeeker);
+
+            PawnRelationUtility.TryAppendRelationsWithColonistsInfo(ref text, marriageSeeker);
+
+            var choiceLetterDiplomaticMarriage =
+                (ChoiceLetter_DiplomaticMarriage)LetterMaker.MakeLetter(def.letterLabel, text, def.letterDef);
+            choiceLetterDiplomaticMarriage.title =
+                "MFI_DiplomaticMarriageLabel".Translate(betrothed.LabelShort).CapitalizeFirst();
+            choiceLetterDiplomaticMarriage.radioMode = false;
+            choiceLetterDiplomaticMarriage.marriageSeeker = marriageSeeker;
+            choiceLetterDiplomaticMarriage.betrothed = betrothed;
+            choiceLetterDiplomaticMarriage.StartTimeout(TimeoutTicks);
+            Find.LetterStack.ReceiveLetter(choiceLetterDiplomaticMarriage);
+            //Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterDiplomaticMarriage);
+            return true;
+        }
+
+        private bool TryFindBetrothed(out Pawn betrothed)
+        {
+            return (from potentialPartners in PawnsFinder
+                    .AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonistsAndPrisoners_NoCryptosleep
+                    where !LovePartnerRelationUtility.HasAnyLovePartner(potentialPartners) ||
+                          LovePartnerRelationUtility.ExistingMostLikedLovePartner(potentialPartners, false) ==
+                          marriageSeeker
+                    select potentialPartners).TryRandomElementByWeight(
+                marriageSeeker2 => marriageSeeker.relations.SecondaryLovinChanceFactor(marriageSeeker2), out betrothed);
+        }
+
+        private static bool TryFindMarriageSeeker(out Pawn marriageSeeker)
+        {
+            return (from x in Find.WorldPawns.AllPawnsAlive
+                    where x.Faction != null && !x.Faction.def.hidden && !x.Faction.def.permanentEnemy && !x.Faction.IsPlayer
+                          && x.Faction.PlayerGoodwill <= 50 && !x.Faction.defeated &&
+                          x.Faction.def.techLevel <= TechLevel.Medieval
+                          //&& x.Faction.leader is { IsPrisoner: false, Spawned: false }
+                          && !x.IsPrisoner && !x.Spawned && x.relations != null && x.RaceProps.Humanlike
+                          && !SettlementUtility.IsPlayerAttackingAnySettlementOf(x.Faction) && !PeaceTalksExist(x.Faction)
+                          && (!LovePartnerRelationUtility.HasAnyLovePartner(x) ||
+                              LovePartnerRelationUtility.ExistingMostLikedLovePartner(x, false)?.Faction ==
+                              Faction.OfPlayer)
+                    select x).TryRandomElement(out marriageSeeker);
+        }
+
+        private static bool PeaceTalksExist(Faction faction)
+        {
+            var peaceTalks = Find.WorldObjects.PeaceTalks;
+            foreach (var peaceTalk in peaceTalks)
+            {
+                if (peaceTalk.Faction == faction)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+
+    public class ChoiceLetter_CrE_DiplomaticMarriage : ChoiceLetter
+    {
+        public Pawn betrothed;
+        private int goodWillGainedFromMarriage;
+        public Pawn marriageSeeker;
+
+        public override bool CanShowInLetterStack => base.CanShowInLetterStack &&
+                                                     PawnsFinder
+                                                         .AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists
+                                                         .Contains(value: betrothed);
+
+        public override IEnumerable<DiaOption> Choices
+        {
+            get
+            {
+                if (ArchivedOnly)
+                {
+                    yield return Option_Close;
+                }
+                else
+                {
+                    var accept = new DiaOption("RansomDemand_Accept".Translate())
+                    {
+                        action = () =>
+                        {
+                            goodWillGainedFromMarriage =
+                                (int)MFI_DiplomacyTunings.PawnValueInGoodWillAmountOut.Evaluate(betrothed.MarketValue);
+                            marriageSeeker.Faction.SetRelationDirect(Faction.OfPlayer,
+                                (FactionRelationKind)Math.Min((int)marriageSeeker.Faction.PlayerRelationKind + 1, 2),
+                                true, "LetterLabelAcceptedProposal".Translate());
+                            marriageSeeker.Faction.TryAffectGoodwillWith(Faction.OfPlayer, goodWillGainedFromMarriage,
+                                false);
+                            betrothed.relations.AddDirectRelation(PawnRelationDefOf.Fiance, marriageSeeker);
+
+                            var caravan = betrothed.GetCaravan();
+                            if (caravan != null)
+                            {
+                                CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(betrothed, caravan.PawnsListForReading);
+                                caravan.RemovePawn(betrothed);
+                            }
+
+                            DetermineAndDoOutcome(marriageSeeker, betrothed);
+                            Find.LetterStack.RemoveLetter(this);
+                        }
+                    };
+                    var dialogueNodeAccept = new DiaNode("MFI_AcceptedProposal"
+                        .Translate(betrothed, marriageSeeker.Faction).CapitalizeFirst().AdjustedFor(marriageSeeker));
+                    dialogueNodeAccept.options.Add(Option_Close);
+                    accept.link = dialogueNodeAccept;
+
+                    var reject = new DiaOption("RansomDemand_Reject".Translate())
+                    {
+                        action = () =>
+                        {
+                            if (Rand.Chance(0.2f))
+                            {
+                                marriageSeeker.Faction.TryAffectGoodwillWith(Faction.OfPlayer,
+                                    MFI_DiplomacyTunings.GoodWill_DeclinedMarriage_Impact.RandomInRange);
+                            }
+
+                            Find.LetterStack.RemoveLetter(this);
+                        }
+                    };
+                    var dialogueNodeReject = new DiaNode("MFI_DejectedProposal"
+                        .Translate(marriageSeeker.LabelCap, marriageSeeker.Faction).CapitalizeFirst()
+                        .AdjustedFor(marriageSeeker));
+                    dialogueNodeReject.options.Add(Option_Close);
+                    reject.link = dialogueNodeReject;
+
+                    yield return accept;
+                    yield return reject;
+                    yield return Option_Postpone;
+                }
+            }
+        }
+
+        private static void DetermineAndDoOutcome(Pawn marriageSeeker, Pawn betrothed)
+        {
+            if (Prefs.LogVerbose)
+            {
+                Log.Warning("Determine and do outcome after marriage.");
+            }
+
+            betrothed.SetFaction(!marriageSeeker.HostileTo(Faction.OfPlayer)
+                ? marriageSeeker.Faction
+                : null);
+
+            Faction.OfPlayer.ideos?.RecalculateIdeosBasedOnPlayerPawns();
+
+            //todo: maybe plan visit, deliver dowry, do wedding.
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_References.Look(ref betrothed, "betrothed");
+            Scribe_References.Look(ref marriageSeeker, "marriageSeeker");
+        }
+    }
 }

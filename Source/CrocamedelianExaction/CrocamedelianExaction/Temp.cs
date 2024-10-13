@@ -18,15 +18,13 @@ namespace CrocamedelianExaction
         public static bool Do()
         {
 
-            IncidentDef incidentDef = DefDatabase<IncidentDef>.GetNamed("CrE_PawnLend", true);
+            IncidentDef incidentDef = DefDatabase<IncidentDef>.GetNamed("CrE_PiratePawn_Extort", true);
             //IncidentDef incidentDef = DefDatabase<IncidentDef>.GetNamed("MFI_PirateExtortion", true);
 
-            // Create incident parameters
-            var incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, Find.AnyPlayerHomeMap);
+            var incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.Misc, Find.AnyPlayerHomeMap);
             incidentParms.forced = true;
             incidentParms.target = Find.AnyPlayerHomeMap;
 
-            // Try to execute the incident
             bool result = incidentDef.Worker.TryExecute(incidentParms);
 
 
