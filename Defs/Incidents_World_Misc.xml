@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+   <IncidentDef>
+    <defName>CrE_PawnLend</defName>
+    <label>pirate extortion</label>
+    <category>ThreatSmall</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>MoreFactionInteraction.IncidentWorker_Extortion</workerClass>
+    <letterLabel>Pirate fee demand</letterLabel>
+    <letterDef>ExtortionDemand</letterDef>
+    <baseChance>1.25</baseChance>
+    <earliestDay>30</earliestDay>
+    <minRefireDays>15</minRefireDays>
+    <chanceFactorByPopulationCurve>
+      <points>
+        <li>(2,0)</li>
+        <li>(7,1)</li>
+      </points>
+    </chanceFactorByPopulationCurve>
+  </IncidentDef>
+</Defs>

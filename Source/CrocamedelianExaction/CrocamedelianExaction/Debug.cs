@@ -24,6 +24,12 @@ namespace CrocamedelianExaction
             Util.Msg(CrE_GameComponent.GetRandomPawnForEvent());
         }
 
+        [DebugAction(null, null, false, false, false, false, 0, false, category = "Exaction", name = "REMOVE THIS LATER", requiresRoyalty = false, requiresIdeology = false, requiresBiotech = false, actionType = 0, allowedGameStates = LudeonTK.AllowedGameStates.Playing)]
+        private static void TestDoInci() // Prints current CrE points
+        {
+            IncidentAllyPrisonerRescue.Do();
+        }
+
         private const string CATEGORY = "Exaction";
     }
 }

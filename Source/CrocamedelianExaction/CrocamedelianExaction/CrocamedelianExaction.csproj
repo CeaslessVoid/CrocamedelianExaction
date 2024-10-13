@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefOf.cs" />
+    <Compile Include="Letters.cs" />
+    <Compile Include="Temp.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Settings.cs" />
