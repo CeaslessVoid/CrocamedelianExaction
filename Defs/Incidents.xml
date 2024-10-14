@@ -28,4 +28,18 @@
 	<letterDef>PositiveEvent</letterDef>
   <baseChance>0.0</baseChance>
   </IncidentDef>
+
+  <IncidentDef>
+    <defName>CrE_PiratePawn_NoReturn</defName>
+    <label>CrE Pirate Pawn No Return</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>CrocamedelianExaction.CrE_PiratePawn_Return</workerClass>
+    <letterLabel>{PAWN_nameDef} Missing</letterLabel>
+    <letterText>The pirates have decided that they much prefer to keep {PAWN_nameDef} as a permananet slave in their colony. This is a major loss for us has many will miss them.</letterText>
+	<letterDef>NegativeEvent</letterDef>
+  <baseChance>0.0</baseChance>
+  </IncidentDef>
 </Defs>

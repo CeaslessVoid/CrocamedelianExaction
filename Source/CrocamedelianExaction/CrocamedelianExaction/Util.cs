@@ -27,6 +27,22 @@ namespace CrocamedelianExaction
             Log.Error("[CrE] " + ((o != null) ? o.ToString() : null));
         }
 
+        public static void PrintCaptureList()
+        {
+            string text = "";
+            foreach (Pawn pawn in CrE_GameComponent.CapturedPawnsQue)
+            {
+                string str = text;
+                Name name = pawn.Name;
+                text = str + ((name != null) ? name.ToString() : null) + ", ";
+            }
+            if (text != "")
+            {
+                text = text.Substring(0, text.Length - ", ".Length);
+            }
+            Util.Msg("Que: " + text);
+        }
+
 
     }
 

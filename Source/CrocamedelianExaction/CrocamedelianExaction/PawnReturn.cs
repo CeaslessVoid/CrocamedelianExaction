@@ -63,7 +63,7 @@ namespace CrocamedelianExaction
             }
             CrE_GameComponent.CapturedPawnsQue.Add(pawn);
 
-            IncidentDef CrE_PawnReturn = CrE_DefOf.CrE_PiratePawn_Return;
+            IncidentDef CrE_PawnReturn = CrE_DefOf.CrE_PiratePawn_NoReturn;
             TaggedString taggedString = GrammarResolverSimpleStringExtensions.Formatted(CrE_PawnReturn.letterLabel, NamedArgumentUtility.Named(pawn, "PAWN")).AdjustedFor(pawn, "PAWN", true);
             TaggedString taggedString2 = GrammarResolverSimpleStringExtensions.Formatted(CrE_PawnReturn.letterText, NamedArgumentUtility.Named(pawn, "PAWN")).AdjustedFor(pawn, "PAWN", true);
             Find.LetterStack.ReceiveLetter(taggedString, taggedString2, CrE_PawnReturn.letterDef, new LookTargets(pawn), null, null, null, null, 0, true);

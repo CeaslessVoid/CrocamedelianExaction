@@ -41,7 +41,7 @@ namespace CrocamedelianExaction
         public int maxDaysBetweenEvents = 1; // 25
 
         // Chance Pawn is kept by pirates
-        public float CrE_PawnLossChance = 0.3f;
+        public float CrE_PawnLossChance = 1f;
 
     }
 

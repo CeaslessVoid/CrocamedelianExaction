@@ -78,7 +78,7 @@ namespace CrocamedelianExaction
 
                 if (Rand.Chance(Settings.CrE_ExtortLossChance))
                 {
-
+                    CrE_PiratePawn_NoReturn.Do();
                 }
                 else
                 {

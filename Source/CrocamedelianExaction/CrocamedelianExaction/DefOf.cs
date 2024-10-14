@@ -16,6 +16,7 @@ namespace CrocamedelianExaction
     {
         //public static IncidentDef CrE_PiratePawn_Extort;
         public static IncidentDef CrE_PiratePawn_Return;
+        public static IncidentDef CrE_PiratePawn_NoReturn;
     }
 
 }
