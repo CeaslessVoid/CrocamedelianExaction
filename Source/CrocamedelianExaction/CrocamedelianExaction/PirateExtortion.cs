@@ -11,24 +11,30 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Verse;
 
 namespace CrocamedelianExaction
 {
-    public class IncidentWorker_CrEDiplomaticMarriage : IncidentWorker_DiplomaticMarriage
+    public class IncidentWorker_CrEPiratePawnExtort : IncidentWorker_DiplomaticMarriage
     {
         private const int TimeoutTicks = GenDate.TicksPerDay;
         private Pawn betrothed;
         private Pawn marriageSeeker;
 
+        // Make sure not all your colinists are taken
+        private bool has_pawn_out = false;
+
+        public float chance_modifier = 2 * ((1 / (1 + Mathf.Exp(-0.1f * (CrE_GameComponent.CrE_Points - 50)))) - 0.5f);
         public override float BaseChanceThisGame => Math.Max(0.01f,
-            base.BaseChanceThisGame - StorytellerUtilityPopulation.PopulationIntent);
+            Mathf.Clamp(base.BaseChanceThisGame - StorytellerUtilityPopulation.PopulationIntent + chance_modifier, 0.0f, 1.0f));
 
         public override bool CanFireNowSub(IncidentParms parms)
         {
             return base.CanFireNowSub(parms) && TryFindMarriageSeeker(out marriageSeeker)
                                              && TryFindBetrothed(out betrothed)
-                                             && !this.IsScenarioBlocked();
+                                             && !this.IsScenarioBlocked()
+                                             && !has_pawn_out;
         }
 
         public override bool TryExecuteWorker(IncidentParms parms)

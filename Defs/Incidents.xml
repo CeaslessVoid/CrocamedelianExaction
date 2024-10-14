@@ -7,7 +7,7 @@
     <targetTags>
       <li>World</li>
     </targetTags>
-    <workerClass>CrocamedelianExaction.IncidentWorker_CrEDiplomaticMarriage</workerClass>
+    <workerClass>CrocamedelianExaction.IncidentWorker_CrEPiratePawnExtort</workerClass>
     <letterLabel>CrE Temp</letterLabel>
     <letterDef>CrE_PiratePawn_Extort_Letter</letterDef>
     <baseChance>0.5</baseChance>

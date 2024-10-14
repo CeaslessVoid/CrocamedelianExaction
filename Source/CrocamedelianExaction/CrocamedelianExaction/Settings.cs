@@ -31,6 +31,15 @@ namespace CrocamedelianExaction
         public bool CrE_Female = true;
 
 
+
+
+
+        //--------------------------------------
+        // Data Store
+
+        public bool CrE_has_pawn_pirate = false;
+
+
     }
 
 }
