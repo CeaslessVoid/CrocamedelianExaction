@@ -51,8 +51,7 @@
               "ViewState": "AQIAAAcAAAAAAAAAAAAcwB0AAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-10T11:59:18.487Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -64,8 +63,7 @@
               "RelativeToolTip": "CrocamedelianExaction\\Temp.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T11:03:07.122Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-13T11:03:07.122Z"
             },
             {
               "$type": "Document",
@@ -77,8 +75,7 @@
               "RelativeToolTip": "CrocamedelianExaction\\Debug.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAqwB0AAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T12:04:31.238Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T12:04:31.238Z"
             },
             {
               "$type": "Document",
@@ -90,8 +87,7 @@
               "RelativeToolTip": "CrocamedelianExaction\\Util.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T12:06:16.356Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T12:06:16.356Z"
             },
             {
               "$type": "Document",
@@ -103,8 +99,7 @@
               "RelativeToolTip": "CrocamedelianExaction\\GameComponent.cs",
               "ViewState": "AQIAABQAAAAAAAAAAAAxwBwAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T11:56:43.394Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T11:56:43.394Z"
             },
             {
               "$type": "Document",
@@ -116,8 +111,7 @@
               "RelativeToolTip": "CrocamedelianExaction\\DefOf.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T12:30:53.208Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T12:30:53.208Z"
             },
             {
               "$type": "Document",
@@ -127,7 +121,7 @@
               "RelativeDocumentMoniker": "CrocamedelianExaction\\PirateExtortion.cs",
               "ToolTip": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\PirateExtortion.cs",
               "RelativeToolTip": "CrocamedelianExaction\\PirateExtortion.cs",
-              "ViewState": "AQIAAHgAAAAAAAAAAAAIwJIAAAA4AAAA",
+              "ViewState": "AQIAADUAAAAAAAAAAAAwwL8AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-13T11:43:06.591Z",
               "EditorCaption": ""

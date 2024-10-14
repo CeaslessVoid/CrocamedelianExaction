@@ -2,6 +2,6 @@
 <Defs>
   <LetterDef ParentName="CustomChoiceLetterBase">
     <defName>CrE_PiratePawn_Extort_Letter</defName>
-    <letterClass>MoreFactionInteraction.ChoiceLetter_DiplomaticMarriage</letterClass>
+    <letterClass>CrocamedelianExaction.ChoiceLetter_CrE_DiplomaticMarriage</letterClass>
   </LetterDef>
 </Defs>
