@@ -85,37 +85,17 @@ namespace CrocamedelianExaction
                     where !LovePartnerRelationUtility.HasAnyLovePartner(potentialPartners) ||
                           LovePartnerRelationUtility.ExistingMostLikedLovePartner(potentialPartners, false) ==
                           marriageSeeker
-                    select potentialPartners).TryRandomElementByWeight(
-                marriageSeeker2 => marriageSeeker.relations.SecondaryLovinChanceFactor(marriageSeeker2), out betrothed);
+                    select potentialPartners).TryRandomElement(out betrothed);
         }
 
         private static bool TryFindMarriageSeeker(out Pawn marriageSeeker)
         {
             return (from x in Find.WorldPawns.AllPawnsAlive
-                    where x.Faction != null && !x.Faction.def.hidden && !x.Faction.def.permanentEnemy && !x.Faction.IsPlayer
-                          && x.Faction.PlayerGoodwill <= 50 && !x.Faction.defeated &&
-                          x.Faction.def.techLevel <= TechLevel.Medieval
-                          //&& x.Faction.leader is { IsPrisoner: false, Spawned: false }
+                    where x.Faction != null && !x.Faction.def.hidden && x.Faction.def.permanentEnemy && !x.Faction.IsPlayer
+                          && !x.Faction.defeated
                           && !x.IsPrisoner && !x.Spawned && x.relations != null && x.RaceProps.Humanlike
-                          && !SettlementUtility.IsPlayerAttackingAnySettlementOf(x.Faction) && !PeaceTalksExist(x.Faction)
-                          && (!LovePartnerRelationUtility.HasAnyLovePartner(x) ||
-                              LovePartnerRelationUtility.ExistingMostLikedLovePartner(x, false)?.Faction ==
-                              Faction.OfPlayer)
+                          && !SettlementUtility.IsPlayerAttackingAnySettlementOf(x.Faction)
                     select x).TryRandomElement(out marriageSeeker);
-        }
-
-        private static bool PeaceTalksExist(Faction faction)
-        {
-            var peaceTalks = Find.WorldObjects.PeaceTalks;
-            foreach (var peaceTalk in peaceTalks)
-            {
-                if (peaceTalk.Faction == faction)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
     }
 
