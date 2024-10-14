@@ -7,10 +7,6 @@
       "RelativeMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|solutionrelative:crocamedelianexaction\\pirateextortion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\crocamedelianexaction\\gamecomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|solutionrelative:crocamedelianexaction\\gamecomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\crocamedelianexaction\\temp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|solutionrelative:crocamedelianexaction\\temp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -23,12 +19,16 @@
       "RelativeMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|solutionrelative:crocamedelianexaction\\debug.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\crocamedelianexaction\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|solutionrelative:crocamedelianexaction\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\crocamedelianexaction\\defof.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|solutionrelative:crocamedelianexaction\\defof.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\crocamedelianexaction\\gamecomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|solutionrelative:crocamedelianexaction\\gamecomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\crocamedelianexaction\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19F384E5-E084-47C0-88DC-2ECDABF0F8D6}|CrocamedelianExaction\\CrocamedelianExaction.csproj|solutionrelative:crocamedelianexaction\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,33 +42,34 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Settings.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\Settings.cs",
               "RelativeDocumentMoniker": "CrocamedelianExaction\\Settings.cs",
               "ToolTip": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\Settings.cs",
               "RelativeToolTip": "CrocamedelianExaction\\Settings.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAcwCcAAAAwAAAA",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAcwB0AAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-10T11:59:18.487Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Temp.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\Temp.cs",
               "RelativeDocumentMoniker": "CrocamedelianExaction\\Temp.cs",
               "ToolTip": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\Temp.cs",
               "RelativeToolTip": "CrocamedelianExaction\\Temp.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAABeAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-13T11:03:07.122Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Debug.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\Debug.cs",
               "RelativeDocumentMoniker": "CrocamedelianExaction\\Debug.cs",
@@ -76,11 +77,12 @@
               "RelativeToolTip": "CrocamedelianExaction\\Debug.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAqwB0AAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T12:04:31.238Z"
+              "WhenOpened": "2024-10-10T12:04:31.238Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Util.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\Util.cs",
               "RelativeDocumentMoniker": "CrocamedelianExaction\\Util.cs",
@@ -93,28 +95,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "GameComponent.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\GameComponent.cs",
               "RelativeDocumentMoniker": "CrocamedelianExaction\\GameComponent.cs",
               "ToolTip": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\GameComponent.cs",
               "RelativeToolTip": "CrocamedelianExaction\\GameComponent.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAA1wDUAAAArAAAA",
+              "ViewState": "AQIAABQAAAAAAAAAAAAxwBwAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-10T11:56:43.394Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "DefOf.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\DefOf.cs",
               "RelativeDocumentMoniker": "CrocamedelianExaction\\DefOf.cs",
               "ToolTip": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\DefOf.cs",
               "RelativeToolTip": "CrocamedelianExaction\\DefOf.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T12:30:53.208Z"
+              "WhenOpened": "2024-10-10T12:30:53.208Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -124,7 +127,7 @@
               "RelativeDocumentMoniker": "CrocamedelianExaction\\PirateExtortion.cs",
               "ToolTip": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\CrocamedelianExaction\\Source\\CrocamedelianExaction\\CrocamedelianExaction\\PirateExtortion.cs",
               "RelativeToolTip": "CrocamedelianExaction\\PirateExtortion.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAAAFcAAAA/AAAA",
+              "ViewState": "AQIAAHgAAAAAAAAAAAAIwJIAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-13T11:43:06.591Z",
               "EditorCaption": ""

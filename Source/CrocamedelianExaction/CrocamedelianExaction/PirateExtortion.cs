@@ -13,6 +13,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
+using static System.Collections.Specialized.BitVector32;
+using Verse.Noise;
 
 namespace CrocamedelianExaction
 {
@@ -39,23 +41,8 @@ namespace CrocamedelianExaction
 
         public override bool TryExecuteWorker(IncidentParms parms)
         {
-            if (!TryFindMarriageSeeker(out marriageSeeker))
+            if (!TryFindMarriageSeeker(out marriageSeeker) || !TryFindBetrothed(out betrothed))
             {
-                if (Prefs.LogVerbose)
-                {
-                    Log.Warning("no marriageseeker");
-                }
-
-                return false;
-            }
-
-            if (!TryFindBetrothed(out betrothed))
-            {
-                if (Prefs.LogVerbose)
-                {
-                    Log.Warning("no betrothed");
-                }
-
                 return false;
             }
 
@@ -74,7 +61,6 @@ namespace CrocamedelianExaction
             choiceLetterDiplomaticMarriage.betrothed = betrothed;
             choiceLetterDiplomaticMarriage.StartTimeout(TimeoutTicks);
             Find.LetterStack.ReceiveLetter(choiceLetterDiplomaticMarriage);
-            //Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterDiplomaticMarriage);
             return true;
         }
 
@@ -154,13 +140,18 @@ namespace CrocamedelianExaction
                     {
                         action = () =>
                         {
-                            if (Rand.Chance(0.2f))
-                            {
-                                marriageSeeker.Faction.TryAffectGoodwillWith(Faction.OfPlayer,
-                                    MFI_DiplomacyTunings.GoodWill_DeclinedMarriage_Impact.RandomInRange);
-                            }
-
                             Find.LetterStack.RemoveLetter(this);
+
+                            var incidentParms =
+                            StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, Find.AnyPlayerHomeMap);
+                            incidentParms.forced = true;
+                            incidentParms.faction = marriageSeeker.Faction;
+                            incidentParms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
+                            incidentParms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
+                            incidentParms.target = Find.AnyPlayerHomeMap;
+
+                            IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
+
                         }
                     };
                     var dialogueNodeReject = new DiaNode("MFI_DejectedProposal"
