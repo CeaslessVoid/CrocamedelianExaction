@@ -47,8 +47,6 @@ namespace CrocamedelianExaction
                 .Translate(pirateLeader.LabelShort, vicitim.LabelShort, pirateLeader.Faction.Name)
                 .AdjustedFor(pirateLeader);
 
-            PawnRelationUtility.TryAppendRelationsWithColonistsInfo(ref text, pirateLeader);
-
             var ChoiceLetter_CrE_Demand_Pawn =
                 (ChoiceLetter_CrE_Demand_Pawn)LetterMaker.MakeLetter(def.letterLabel, text, def.letterDef);
             ChoiceLetter_CrE_Demand_Pawn.title =
@@ -74,7 +72,7 @@ namespace CrocamedelianExaction
             return (from x in Find.WorldPawns.AllPawnsAlive
                     where x.Faction != null && !x.Faction.def.hidden && x.Faction.def.permanentEnemy && !x.Faction.IsPlayer
                           && !x.Faction.defeated
-                          && !x.IsPrisoner && !x.Spawned && x.relations != null && x.RaceProps.Humanlike
+                          && !x.Spawned && x.RaceProps.Humanlike
                           && !SettlementUtility.IsPlayerAttackingAnySettlementOf(x.Faction)
                     select x).TryRandomElement(out pirateLeader);
         }
@@ -84,7 +82,6 @@ namespace CrocamedelianExaction
     public class ChoiceLetter_CrE_Demand_Pawn : ChoiceLetter
     {
         public Pawn vicitim;
-        private int goodWillGainedFromMarriage;
         public Pawn pirateLeader;
 
         public override bool CanShowInLetterStack => base.CanShowInLetterStack &&
@@ -109,6 +106,7 @@ namespace CrocamedelianExaction
 
                             CrE_GameComponent.ChangeCrEPoints(Rand.Range(5,7));
                             CrE_GameComponent.has_pawn_out = true;
+                            CrE_GameComponent.CurrentCrEPawn = vicitim;
 
                             var caravan = vicitim.GetCaravan();
                             if (caravan != null)
@@ -121,7 +119,7 @@ namespace CrocamedelianExaction
                             Find.LetterStack.RemoveLetter(this);
                         }
                     };
-                    var dialogueNodeAccept = new DiaNode("MFI_AcceptedProposal"
+                    var dialogueNodeAccept = new DiaNode("CrE_AcceptedPiratePawn_Extort"
                         .Translate(vicitim, pirateLeader.Faction).CapitalizeFirst().AdjustedFor(pirateLeader));
                     dialogueNodeAccept.options.Add(Option_Close);
                     accept.link = dialogueNodeAccept;
@@ -145,7 +143,7 @@ namespace CrocamedelianExaction
 
                         }
                     };
-                    var dialogueNodeReject = new DiaNode("MFI_DejectedProposal"
+                    var dialogueNodeReject = new DiaNode("CrE_RejectedPiratePawn_Extort"
                         .Translate(pirateLeader.LabelCap, pirateLeader.Faction).CapitalizeFirst()
                         .AdjustedFor(pirateLeader));
                     dialogueNodeReject.options.Add(Option_Close);

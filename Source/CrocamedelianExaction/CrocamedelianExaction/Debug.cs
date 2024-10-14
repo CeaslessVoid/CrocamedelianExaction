@@ -25,10 +25,22 @@ namespace CrocamedelianExaction
             Util.Msg(CrE_GameComponent.GetRandomPawnForEvent());
         }
 
+        [DebugAction(null, null, false, false, false, false, 0, false, category = "Exaction", name = "Print Current Pawn", requiresRoyalty = false, requiresIdeology = false, requiresBiotech = false, actionType = 0, allowedGameStates = LudeonTK.AllowedGameStates.Playing)]
+        private static void PrintCurrentVictim() // Prints current CrE vicitim pawn
+        {
+            Util.Msg(CrE_GameComponent.CurrentCrEPawn);
+        }
+
         [DebugAction(null, null, false, false, false, false, 0, false, category = "Exaction", name = "REMOVE THIS LATER", requiresRoyalty = false, requiresIdeology = false, requiresBiotech = false, actionType = 0, allowedGameStates = LudeonTK.AllowedGameStates.Playing)]
         private static void TestDoInci() // Prints current CrE points
         {
             IncidentAllyPrisonerRescue.Do();
+        }
+
+        [DebugAction(null, null, false, false, false, false, 0, false, category = "Exaction", name = "REMOVE THIS LATER 2", requiresRoyalty = false, requiresIdeology = false, requiresBiotech = false, actionType = 0, allowedGameStates = LudeonTK.AllowedGameStates.Playing)]
+        private static void TestDoInciReturn() // Prints current CrE points
+        {
+            CrE_PiratePawn_Return.Do();
         }
 
         private const string CATEGORY = "Exaction";

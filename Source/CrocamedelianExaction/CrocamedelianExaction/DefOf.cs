@@ -15,6 +15,7 @@ namespace CrocamedelianExaction
     public static class CrE_DefOf
     {
         //public static IncidentDef CrE_PiratePawn_Extort;
+        public static IncidentDef CrE_PiratePawn_Return;
     }
 
 }

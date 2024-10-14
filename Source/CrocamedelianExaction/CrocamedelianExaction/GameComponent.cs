@@ -8,6 +8,8 @@ using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
+using Verse.Noise;
+using UnityEngine;
 
 namespace CrocamedelianExaction
 {
@@ -27,6 +29,80 @@ namespace CrocamedelianExaction
         {
             CrE_GameComponent.CrE_Points = 0;
             CrE_GameComponent.has_pawn_out = false;
+
+            CrE_GameComponent.CapturedPawnsQue.Clear();
+            CrE_GameComponent.CurrentCrEPawn = null;
+            CrE_GameComponent.CrE_Pawn_Return_Time = -1;
+        }
+
+        public static void InitOnLoad()
+        {
+            if (CrE_GameComponent.CapturedPawnsQue == null)
+            {
+                CrE_GameComponent.CapturedPawnsQue = new List<Pawn>();
+            }
+        }
+
+        public override void GameComponentTick() // Every day
+        {
+            base.GameComponentTick();
+            if (GenTicks.IsTickInterval(60000))
+            {
+                PerformDailyPawnCheck();
+            }
+        }
+
+        private void PerformDailyPawnCheck()
+        {
+            if (CurrentCrEPawn != null)
+            {
+                if (Find.WorldPawns.Contains(CurrentCrEPawn))
+                {
+                    // If the pawn is used before the move, they will dissapear but the chance of this happening is low
+                    Find.WorldPawns.RemovePawn(CurrentCrEPawn);
+                    Util.Msg("Move Pawns Out of WorldPawns.");
+
+                    int minDays = Settings.minDaysBetweenEvents * 60000;
+                    int maxDays = Settings.maxDaysBetweenEvents * 60000;
+
+                    CrE_Pawn_Return_Time = Find.TickManager.TicksGame + UnityEngine.Random.Range(minDays, maxDays);
+                }
+            }
+
+            // What to do with sent pawns
+            if (Find.TickManager.TicksGame >= CrE_GameComponent.CrE_Pawn_Return_Time && CrE_GameComponent.CrE_Pawn_Return_Time != -1 && CrE_GameComponent.CurrentCrEPawn != null)
+            {
+                // All these actions will set the timer back down
+                CrE_GameComponent.CrE_Pawn_Return_Time = -1;
+                has_pawn_out = false;
+
+                if (Rand.Chance(Settings.CrE_ExtortLossChance))
+                {
+
+                }
+                else
+                {
+                    CrE_PiratePawn_Return.Do();
+                }
+
+                return;
+            }
+
+            // Forces events to happen -----------------------------------------------------------------------------------------------
+            float chance = 0.05f + (float)Math.Round(Math.Exp(2 * ((1 / (1 + Mathf.Exp(-0.02f * CrE_GameComponent.CrE_Points))) - 0.5f)) - 1, 2);
+
+            if (CrE_Pawn_Return_Time == -1 && Rand.Chance(Mathf.Clamp(chance, 0.0f, 1.0f)) && Find.TickManager.TicksGame >= 60000 * 15 && !has_pawn_out)
+            {
+                IncidentDef incidentDef = DefDatabase<IncidentDef>.GetNamed("CrE_PiratePawn_Extort", true);
+
+                var incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.Misc, Find.AnyPlayerHomeMap);
+                incidentParms.forced = true;
+                incidentParms.target = Find.AnyPlayerHomeMap;
+
+                bool result = incidentDef.Worker.TryExecute(incidentParms);
+
+                return;
+            }
         }
 
         // Change points
@@ -35,6 +111,9 @@ namespace CrocamedelianExaction
             CrE_GameComponent.CrE_Points += points; // Just use negative numbers for decrease
         }
 
+        public static List<Pawn> CapturedPawnsQue = new List<Pawn>();
+        public static int CrE_Pawn_Return_Time = -1; // Time to return
+        public static Pawn CurrentCrEPawn = null;
 
         public static int CrE_Points; // CrE Points
         public static bool has_pawn_out; // If a pawn has already been taken
@@ -61,12 +140,17 @@ namespace CrocamedelianExaction
             return (Settings.CrE_Male || pawn.gender != Gender.Male) && (Settings.CrE_Female || pawn.gender != Gender.Female);
         }
 
+
         public override void ExposeData()
         {
             base.ExposeData();
 
             Scribe_Values.Look(ref CrE_Points, "CrE_Points", 0, true);
             Scribe_Values.Look(ref has_pawn_out, "has_pawn_out", false, true);
+
+            Scribe_Collections.Look<Pawn>(ref CrE_GameComponent.CapturedPawnsQue, "CapturedPawnsQue", LookMode.Deep, Array.Empty<object>());
+            Scribe_Values.Look(ref CurrentCrEPawn, "CurrentCrEPawn", null, true);
+            Scribe_Values.Look(ref CrE_Pawn_Return_Time, "CrE_Pawn_Return_Time", -1, true);
 
         }
 

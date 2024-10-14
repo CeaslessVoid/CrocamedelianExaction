@@ -1,0 +1,77 @@
+﻿using HarmonyLib;
+using LudeonTK;
+using MoreFactionInteraction;
+using MoreFactionInteraction.General;
+using MoreFactionInteraction.MoreFactionWar;
+using RimWorld;
+using RimWorld.Planet;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using UnityEngine;
+using Verse;
+using static System.Collections.Specialized.BitVector32;
+using Verse.Noise;
+using Unity.Jobs.LowLevel.Unsafe;
+
+namespace CrocamedelianExaction
+{
+    public class CrE_PiratePawn_Return : IncidentWorker
+    {
+        public static bool Do()
+        {
+            Map randomPlayerHomeMap = Current.Game.RandomPlayerHomeMap;
+            IntVec3 intVec;
+            if (!CrE_PiratePawn_Return.TryFindEntryCell(randomPlayerHomeMap, out intVec))
+            {
+                return false;
+            }
+            Pawn pawn = CrE_GameComponent.CurrentCrEPawn;
+            if (pawn == null)
+            {
+                return false;
+            }
+            pawn.SetFactionDirect(Faction.OfPlayer);
+            GenSpawn.Spawn(pawn, intVec, randomPlayerHomeMap, 0);
+            IncidentDef CrE_PawnReturn = CrE_DefOf.CrE_PiratePawn_Return;
+            TaggedString taggedString = GrammarResolverSimpleStringExtensions.Formatted(CrE_PawnReturn.letterLabel, NamedArgumentUtility.Named(pawn, "PAWN")).AdjustedFor(pawn, "PAWN", true);
+            TaggedString taggedString2 = GrammarResolverSimpleStringExtensions.Formatted(CrE_PawnReturn.letterText, NamedArgumentUtility.Named(pawn, "PAWN")).AdjustedFor(pawn, "PAWN", true);
+            Find.LetterStack.ReceiveLetter(taggedString, taggedString2, CrE_PawnReturn.letterDef, new LookTargets(pawn), null, null, null, null, 0, true);
+
+            CrE_GameComponent.CurrentCrEPawn = null;
+            return true;
+        }
+
+        public static bool TryFindEntryCell(Map map, out IntVec3 cell)
+        {
+            return CellFinder.TryFindRandomEdgeCellWith((IntVec3 c) => map.reachability.CanReachColony(c) && !GridsUtility.Fogged(c, map), map, CellFinder.EdgeRoadChance_Neutral, out cell);
+        }
+    }
+
+    // Not returned
+    public class CrE_PiratePawn_NoReturn : IncidentWorker
+    {
+        public static bool Do()
+        {
+            Pawn pawn = CrE_GameComponent.CurrentCrEPawn;
+            if (pawn == null)
+            {
+                return false;
+            }
+            CrE_GameComponent.CapturedPawnsQue.Add(pawn);
+
+            IncidentDef CrE_PawnReturn = CrE_DefOf.CrE_PiratePawn_Return;
+            TaggedString taggedString = GrammarResolverSimpleStringExtensions.Formatted(CrE_PawnReturn.letterLabel, NamedArgumentUtility.Named(pawn, "PAWN")).AdjustedFor(pawn, "PAWN", true);
+            TaggedString taggedString2 = GrammarResolverSimpleStringExtensions.Formatted(CrE_PawnReturn.letterText, NamedArgumentUtility.Named(pawn, "PAWN")).AdjustedFor(pawn, "PAWN", true);
+            Find.LetterStack.ReceiveLetter(taggedString, taggedString2, CrE_PawnReturn.letterDef, new LookTargets(pawn), null, null, null, null, 0, true);
+
+            CrE_GameComponent.CurrentCrEPawn = null;
+            return true;
+        }
+
+    }
+
+}

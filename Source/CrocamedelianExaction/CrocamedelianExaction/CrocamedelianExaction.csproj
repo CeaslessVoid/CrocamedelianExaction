@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefOf.cs" />
+    <Compile Include="PawnReturn.cs" />
     <Compile Include="PirateExtortion.cs" />
     <Compile Include="Temp.cs" />
     <Compile Include="MFI Patches.cs" />

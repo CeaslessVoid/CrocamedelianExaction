@@ -14,4 +14,18 @@
     <earliestDay>15</earliestDay>
     <minRefireDays>30</minRefireDays>
   </IncidentDef>
+
+  <IncidentDef>
+    <defName>CrE_PiratePawn_Return</defName>
+    <label>CrE Pirate Pawn Return</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>CrocamedelianExaction.CrE_PiratePawn_Return</workerClass>
+    <letterLabel>{PAWN_nameDef} Returns</letterLabel>
+    <letterText>{PAWN_nameDef} has returned from do labour for the pirates.</letterText>
+	<letterDef>PositiveEvent</letterDef>
+  <baseChance>0.0</baseChance>
+  </IncidentDef>
 </Defs>
