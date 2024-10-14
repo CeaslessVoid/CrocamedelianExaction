@@ -66,6 +66,7 @@
     <Compile Include="DefOf.cs" />
     <Compile Include="PirateExtortion.cs" />
     <Compile Include="Temp.cs" />
+    <Compile Include="MFI Patches.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Settings.cs" />

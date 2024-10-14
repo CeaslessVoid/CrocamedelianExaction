@@ -16,6 +16,7 @@ namespace CrocamedelianExaction
         private static void PrintCrEPoints() // Prints current CrE points
         {
             Util.Msg(CrE_GameComponent.CrE_Points);
+            Util.Msg(CrE_GameComponent.has_pawn_out);
         }
 
         [DebugAction(null, null, false, false, false, false, 0, false, category = "Exaction", name = "Print Random Valid Pawn", requiresRoyalty = false, requiresIdeology = false, requiresBiotech = false, actionType = 0, allowedGameStates = LudeonTK.AllowedGameStates.Playing)]

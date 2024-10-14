@@ -25,7 +25,8 @@ namespace CrocamedelianExaction
 
         public static void InitOnNewGame()
         {
-            CrE_GameComponent.CrE_Points = Settings.InitalCrEPoints;
+            CrE_GameComponent.CrE_Points = 0;
+            CrE_GameComponent.has_pawn_out = false;
         }
 
         // Change points
@@ -36,6 +37,7 @@ namespace CrocamedelianExaction
 
 
         public static int CrE_Points; // CrE Points
+        public static bool has_pawn_out; // If a pawn has already been taken
 
         public static Pawn GetRandomPawnForEvent()
         {
@@ -54,11 +56,17 @@ namespace CrocamedelianExaction
             return validPawns.RandomElement();
         }
 
+        public static bool isValidPawn(Pawn pawn)
+        {
+            return (Settings.CrE_Male || pawn.gender != Gender.Male) && (Settings.CrE_Female || pawn.gender != Gender.Female);
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
 
-            Scribe_Values.Look(ref CrE_Points, "CrE_Points", defaultValue: Settings.InitalCrEPoints, true);
+            Scribe_Values.Look(ref CrE_Points, "CrE_Points", 0, true);
+            Scribe_Values.Look(ref has_pawn_out, "has_pawn_out", false, true);
 
         }
 

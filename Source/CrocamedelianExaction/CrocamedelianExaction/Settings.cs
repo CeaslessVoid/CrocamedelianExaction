@@ -17,14 +17,10 @@ namespace CrocamedelianExaction
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look<int>(ref this.InitalCrEPoints, "InitalCrEPoints", 50, true);
             Scribe_Values.Look<bool>(ref this.CrE_Male, "CrE_Male", true, true);
             Scribe_Values.Look<bool>(ref this.CrE_Female, "CrE_Female", true, true);
 
         }
-
-        // Starting point for bad events
-        public int InitalCrEPoints = 50;
 
         // Disable for male / female
         public bool CrE_Male = true;
