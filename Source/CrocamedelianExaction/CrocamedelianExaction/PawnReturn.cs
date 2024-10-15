@@ -16,6 +16,7 @@ using Verse;
 using static System.Collections.Specialized.BitVector32;
 using Verse.Noise;
 using Unity.Jobs.LowLevel.Unsafe;
+using rjw;
 
 namespace CrocamedelianExaction
 {
@@ -35,6 +36,13 @@ namespace CrocamedelianExaction
                 return false;
             }
             pawn.SetFactionDirect(Faction.OfPlayer);
+
+            float brokenSeverityGain = Rand.Range(0.3f, 0.7f);
+            pawn.needs.mood.thoughts.memories.TryGainMemory(xxx.got_raped);
+            pawn.health.AddHediff(xxx.feelingBroken, null, null, null);
+            pawn.health.hediffSet.GetFirstHediffOfDef(xxx.feelingBroken).Severity += brokenSeverityGain;
+            pawn.needs.mood.thoughts.memories.TryGainMemory(CrE_DefOf.FeelingBroken);
+
             GenSpawn.Spawn(pawn, intVec, randomPlayerHomeMap, 0);
             IncidentDef CrE_PawnReturn = CrE_DefOf.CrE_PiratePawn_Return;
             TaggedString taggedString = GrammarResolverSimpleStringExtensions.Formatted(CrE_PawnReturn.letterLabel, NamedArgumentUtility.Named(pawn, "PAWN")).AdjustedFor(pawn, "PAWN", true);

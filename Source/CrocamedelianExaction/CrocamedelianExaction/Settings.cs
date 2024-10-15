@@ -37,11 +37,11 @@ namespace CrocamedelianExaction
         public float CrE_ExtortLossChance = 0.3f;
 
         // Lose Pawn Days
-        public int minDaysBetweenEvents = 1; // 10
-        public int maxDaysBetweenEvents = 1; // 25
+        public int minDaysBetweenEvents = 10; // 10
+        public int maxDaysBetweenEvents = 25; // 25
 
         // Chance Pawn is kept by pirates
-        public float CrE_PawnLossChance = 1f;
+        public float CrE_PawnLossChance = 0.2f;
 
     }
 
