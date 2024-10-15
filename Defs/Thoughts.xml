@@ -15,7 +15,7 @@
 		</stages>
 	</ThoughtDef>
 
-  <ThoughtDef>
+  	<ThoughtDef>
 		<defName>PirateForceWorkOther</defName>
 		<thoughtClass>Thought_Memory</thoughtClass>
 		<durationDays>10.0</durationDays>
@@ -24,7 +24,7 @@
 		<stages>
 			<li>
 				<label>Colonist sent to pirates</label>
-				<description>One of our colonist were forced to sent to the pirates. I hope their ok.</description>
+				<description>One of our colonist were forced to sent to the pirates. I hope they are ok.</description>
 				<baseMoodEffect>-5</baseMoodEffect>
 			</li>
 		</stages>

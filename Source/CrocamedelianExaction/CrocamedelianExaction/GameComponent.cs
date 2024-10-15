@@ -52,22 +52,30 @@ namespace CrocamedelianExaction
             }
         }
 
-        private void PerformDailyPawnCheck()
+        public static void MovePawnFromWorld(Pawn pawn)
         {
-            if (CurrentCrEPawn != null)
+            if (pawn != null)
             {
-                if (Find.WorldPawns.Contains(CurrentCrEPawn))
+                if (Find.WorldPawns.Contains(pawn))
                 {
                     // If the pawn is used before the move, they will dissapear but the chance of this happening is low
-                    Find.WorldPawns.RemovePawn(CurrentCrEPawn);
+                    Find.WorldPawns.RemovePawn(pawn);
                     Util.Msg("Move Pawns Out of WorldPawns.");
-
-                    int minDays = Settings.minDaysBetweenEvents * 60000;
-                    int maxDays = Settings.maxDaysBetweenEvents * 60000;
-
-                    CrE_Pawn_Return_Time = Find.TickManager.TicksGame + UnityEngine.Random.Range(minDays, maxDays);
                 }
             }
+        }
+
+        public static void DoPirateTakePawn()
+        {
+            MovePawnFromWorld(CurrentCrEPawn);
+            int minDays = Settings.minDaysBetweenEvents * 60000;
+            int maxDays = Settings.maxDaysBetweenEvents * 60000;
+
+            CrE_Pawn_Return_Time = Find.TickManager.TicksGame + UnityEngine.Random.Range(minDays, maxDays);
+        }
+
+        private void PerformDailyPawnCheck()
+        {
 
             // What to do with sent pawns
             if (Find.TickManager.TicksGame >= CrE_GameComponent.CrE_Pawn_Return_Time && CrE_GameComponent.CrE_Pawn_Return_Time != -1 && CrE_GameComponent.CurrentCrEPawn != null)
@@ -149,7 +157,7 @@ namespace CrocamedelianExaction
             Scribe_Values.Look(ref has_pawn_out, "has_pawn_out", false, true);
 
             Scribe_Collections.Look<Pawn>(ref CrE_GameComponent.CapturedPawnsQue, "CapturedPawnsQue", LookMode.Deep, Array.Empty<object>());
-            Scribe_Values.Look(ref CurrentCrEPawn, "CurrentCrEPawn", null, true);
+            Scribe_References.Look(ref CurrentCrEPawn, "CurrentCrEPawn");
             Scribe_Values.Look(ref CrE_Pawn_Return_Time, "CrE_Pawn_Return_Time", -1, true);
 
         }

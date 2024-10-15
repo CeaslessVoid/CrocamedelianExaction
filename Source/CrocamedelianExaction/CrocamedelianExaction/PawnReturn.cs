@@ -43,6 +43,9 @@ namespace CrocamedelianExaction
             pawn.health.hediffSet.GetFirstHediffOfDef(xxx.feelingBroken).Severity += brokenSeverityGain;
             pawn.needs.mood.thoughts.memories.TryGainMemory(CrE_DefOf.FeelingBroken);
 
+            var thoughtDef = ThoughtDef.Named("PirateForceWork");
+            pawn.needs.mood.thoughts.memories.TryGainMemory(thoughtDef);
+
             GenSpawn.Spawn(pawn, intVec, randomPlayerHomeMap, 0);
             IncidentDef CrE_PawnReturn = CrE_DefOf.CrE_PiratePawn_Return;
             TaggedString taggedString = GrammarResolverSimpleStringExtensions.Formatted(CrE_PawnReturn.letterLabel, NamedArgumentUtility.Named(pawn, "PAWN")).AdjustedFor(pawn, "PAWN", true);
@@ -70,6 +73,16 @@ namespace CrocamedelianExaction
                 return false;
             }
             CrE_GameComponent.CapturedPawnsQue.Add(pawn);
+
+            foreach (Pawn colonist in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists)
+            {
+
+                if (colonist.needs?.mood?.thoughts != null)
+                {
+                    var thoughtDef = ThoughtDef.Named("PirateNoReturn");
+                    colonist.needs.mood.thoughts.memories.TryGainMemory(thoughtDef);
+                }
+            }
 
             IncidentDef CrE_PawnReturn = CrE_DefOf.CrE_PiratePawn_NoReturn;
             TaggedString taggedString = GrammarResolverSimpleStringExtensions.Formatted(CrE_PawnReturn.letterLabel, NamedArgumentUtility.Named(pawn, "PAWN")).AdjustedFor(pawn, "PAWN", true);

@@ -26,7 +26,6 @@
     <letterLabel>{PAWN_nameDef} Returns</letterLabel>
     <letterText>{PAWN_nameDef} has returned from do labour for the pirates.</letterText>
 	<letterDef>PositiveEvent</letterDef>
-  <baseChance>0.0</baseChance>
   </IncidentDef>
 
   <IncidentDef>
@@ -40,6 +39,5 @@
     <letterLabel>{PAWN_nameDef} Missing</letterLabel>
     <letterText>The pirates have decided that they much prefer to keep {PAWN_nameDef} as a permananet slave in their colony. This is a major loss for us has many will miss them.</letterText>
 	<letterDef>NegativeEvent</letterDef>
-  <baseChance>0.0</baseChance>
   </IncidentDef>
 </Defs>

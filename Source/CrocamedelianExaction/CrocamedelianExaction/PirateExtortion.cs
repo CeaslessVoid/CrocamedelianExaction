@@ -21,7 +21,7 @@ namespace CrocamedelianExaction
     public class IncidentWorker_CrEPiratePawnExtort : IncidentWorker_DiplomaticMarriage
     {
         private const int TimeoutTicks = GenDate.TicksPerDay;
-        private Pawn vicitim;
+        private Pawn victim;
         private Pawn pirateLeader;
         // Make sure not all your colinists are taken
         public float chance_modifier = (float)Math.Round(Math.Exp(2 * ((1 / (1 + Mathf.Exp(-0.02f * CrE_GameComponent.CrE_Points))) - 0.5f)) - 1,2);
@@ -31,29 +31,29 @@ namespace CrocamedelianExaction
         public override bool CanFireNowSub(IncidentParms parms)
         {
             return base.CanFireNowSub(parms) && TryFindPirateLeader(out pirateLeader)
-                                             && TryFindVictim(out vicitim)
+                                             && TryFindVictim(out victim)
                                              && !this.IsScenarioBlocked()
                                              && !CrE_GameComponent.has_pawn_out;
         }
 
         public override bool TryExecuteWorker(IncidentParms parms)
         {
-            if (!TryFindPirateLeader(out pirateLeader) || !TryFindVictim(out vicitim))
+            if (!TryFindPirateLeader(out pirateLeader) || !TryFindVictim(out victim))
             {
                 return false;
             }
 
             var text = "CrE_PiratePawn_Extort"
-                .Translate(pirateLeader.LabelShort, vicitim.LabelShort, pirateLeader.Faction.Name)
+                .Translate(pirateLeader.LabelShort, victim.LabelShort, pirateLeader.Faction.Name)
                 .AdjustedFor(pirateLeader);
 
             var ChoiceLetter_CrE_Demand_Pawn =
                 (ChoiceLetter_CrE_Demand_Pawn)LetterMaker.MakeLetter(def.letterLabel, text, def.letterDef);
             ChoiceLetter_CrE_Demand_Pawn.title =
-                "CrE_PiratePawn_ExtortLabel".Translate(vicitim.LabelShort).CapitalizeFirst();
+                "CrE_PiratePawn_ExtortLabel".Translate(victim.LabelShort).CapitalizeFirst();
             ChoiceLetter_CrE_Demand_Pawn.radioMode = false;
             ChoiceLetter_CrE_Demand_Pawn.pirateLeader = pirateLeader;
-            ChoiceLetter_CrE_Demand_Pawn.vicitim = vicitim;
+            ChoiceLetter_CrE_Demand_Pawn.victim = victim;
             ChoiceLetter_CrE_Demand_Pawn.StartTimeout(TimeoutTicks);
             Find.LetterStack.ReceiveLetter(ChoiceLetter_CrE_Demand_Pawn);
             return true;
@@ -81,13 +81,13 @@ namespace CrocamedelianExaction
 
     public class ChoiceLetter_CrE_Demand_Pawn : ChoiceLetter
     {
-        public Pawn vicitim;
+        public Pawn victim;
         public Pawn pirateLeader;
 
         public override bool CanShowInLetterStack => base.CanShowInLetterStack &&
                                                      PawnsFinder
                                                          .AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists
-                                                         .Contains(value: vicitim);
+                                                         .Contains(value: victim);
 
         public override IEnumerable<DiaOption> Choices
         {
@@ -106,21 +106,38 @@ namespace CrocamedelianExaction
 
                             CrE_GameComponent.ChangeCrEPoints(Rand.Range(5,7));
                             CrE_GameComponent.has_pawn_out = true;
-                            CrE_GameComponent.CurrentCrEPawn = vicitim;
+                            CrE_GameComponent.CurrentCrEPawn = victim;
 
-                            var caravan = vicitim.GetCaravan();
+                            var caravan = victim.GetCaravan();
                             if (caravan != null)
                             {
-                                CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(vicitim, caravan.PawnsListForReading);
-                                caravan.RemovePawn(vicitim);
+                                CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(victim, caravan.PawnsListForReading);
+                                caravan.RemovePawn(victim);
                             }
 
-                            DetermineAndDoOutcome(pirateLeader, vicitim);
+                            foreach (Pawn colonist in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists)
+                            {
+                                if (colonist == victim)
+                                {
+                                    continue;
+                                }
+
+                                if (colonist.needs?.mood?.thoughts != null)
+                                {
+                                    var thoughtDef = ThoughtDef.Named("PirateForceWorkOther");
+                                    colonist.needs.mood.thoughts.memories.TryGainMemory(thoughtDef);
+                                }
+                            }
+
+                            CrE_GameComponent.DoPirateTakePawn();
+
+                            DetermineAndDoOutcome(pirateLeader, victim);
+                            
                             Find.LetterStack.RemoveLetter(this);
                         }
                     };
                     var dialogueNodeAccept = new DiaNode("CrE_AcceptedPiratePawn_Extort"
-                        .Translate(vicitim, pirateLeader.Faction).CapitalizeFirst().AdjustedFor(pirateLeader));
+                        .Translate(victim, pirateLeader.Faction).CapitalizeFirst().AdjustedFor(pirateLeader));
                     dialogueNodeAccept.options.Add(Option_Close);
                     accept.link = dialogueNodeAccept;
 
@@ -170,7 +187,7 @@ namespace CrocamedelianExaction
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look(ref vicitim, "vicitim");
+            Scribe_References.Look(ref victim, "victim");
             Scribe_References.Look(ref pirateLeader, "pirateLeader");
         }
     }
