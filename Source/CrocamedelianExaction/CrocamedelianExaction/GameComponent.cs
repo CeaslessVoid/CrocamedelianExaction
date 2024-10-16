@@ -22,7 +22,7 @@ namespace CrocamedelianExaction
         public static Settings Settings { get; private set; }
         public CrE_GameComponent(Game game)
         {
-            CrE_GameComponent.Settings = LoadedModManager.GetMod<Mod>().GetSettings<Settings>();
+            CrE_GameComponent.Settings = LoadedModManager.GetMod<CrEMod>().GetSettings<Settings>();
         }
 
         public static void InitOnNewGame()

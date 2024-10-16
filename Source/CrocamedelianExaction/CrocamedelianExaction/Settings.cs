@@ -46,7 +46,7 @@ namespace CrocamedelianExaction
     {
         public CrEMod(ModContentPack content) : base(content)
         {
-            this._settings = base.GetSettings<Settings>();
+            this._settings = GetSettings<Settings>();
         }
 
         private Settings _settings;
@@ -56,17 +56,14 @@ namespace CrocamedelianExaction
             Listing_Standard listing_Standard = new Listing_Standard();
             listing_Standard.Begin(inRect);
 
-            int minDaysBetweenEvents = this._settings.minDaysBetweenEvents;
-            string text = this._settings.minDaysBetweenEvents.ToString();
-            listing_Standard.TextFieldNumericLabeled<int>("Minimum Pirate Pawn Kept Day", ref this._settings.minDaysBetweenEvents, ref text, 0f, 300f);
-            this._settings.minDaysBetweenEvents = Mathf.RoundToInt(listing_Standard.Slider((float)this._settings.minDaysBetweenEvents, 0f, 300f));
+            string minDaysText = this._settings.minDaysBetweenEvents.ToString();
+            listing_Standard.TextFieldNumericLabeled("Minimum Pirate Pawn Kept Day", ref this._settings.minDaysBetweenEvents, ref minDaysText, 0, 300);
+            this._settings.minDaysBetweenEvents = Mathf.RoundToInt(listing_Standard.Slider(this._settings.minDaysBetweenEvents, 0f, 300f));
             listing_Standard.Gap(12f);
 
-
-            int maxDaysBetweenEvents = this._settings.maxDaysBetweenEvents;
-            string text2 = this._settings.maxDaysBetweenEvents.ToString();
-            listing_Standard.TextFieldNumericLabeled<int>("Maximum Pirate Pawn Kept Day", ref this._settings.maxDaysBetweenEvents, ref text2, 1f, 300f);
-            this._settings.maxDaysBetweenEvents = Mathf.RoundToInt(listing_Standard.Slider((float)this._settings.maxDaysBetweenEvents, 1f, 300f));
+            string maxDaysText = this._settings.maxDaysBetweenEvents.ToString();
+            listing_Standard.TextFieldNumericLabeled("Maximum Pirate Pawn Kept Day", ref this._settings.maxDaysBetweenEvents, ref maxDaysText, 1, 300);
+            this._settings.maxDaysBetweenEvents = Mathf.RoundToInt(listing_Standard.Slider(this._settings.maxDaysBetweenEvents, 1f, 300f));
 
             if (this._settings.minDaysBetweenEvents >= this._settings.maxDaysBetweenEvents)
             {
@@ -75,27 +72,32 @@ namespace CrocamedelianExaction
 
             listing_Standard.Gap(12f);
 
-            float BetrayChance = this._settings.CrE_ExtortLossChance;
-            string text3 = this._settings.CrE_ExtortLossChance.ToString();
-            listing_Standard.TextFieldNumericLabeled<float>("Chance Pirate Keeps Pawn (x 100)", ref this._settings.CrE_ExtortLossChance, ref text3, 0f, 100f);
-            this._settings.CrE_ExtortLossChance = (listing_Standard.Slider((float)this._settings.CrE_ExtortLossChance, 0f, 1f));
-
+            string extortLossChanceText = this._settings.CrE_ExtortLossChance.ToString("F2");
+            listing_Standard.TextFieldNumericLabeled("Chance Pirate Keeps Pawn (x 100)", ref this._settings.CrE_ExtortLossChance, ref extortLossChanceText, 0f, 100f);
+            this._settings.CrE_ExtortLossChance = listing_Standard.Slider(this._settings.CrE_ExtortLossChance, 0f, 1f);
             listing_Standard.Gap(12f);
 
-            listing_Standard.CheckboxLabeled("Allow Male", ref this._settings.CrE_Male, null, 0f, 1f);
+            listing_Standard.CheckboxLabeled("Allow Male", ref this._settings.CrE_Male);
+            listing_Standard.Gap(6f);
 
-            listing_Standard.CheckboxLabeled("Allow Female", ref this._settings.CrE_Female, null, 0f, 1f);
+            listing_Standard.CheckboxLabeled("Allow Female", ref this._settings.CrE_Female);
+            listing_Standard.Gap(6f);
 
             listing_Standard.End();
 
             base.DoSettingsWindowContents(inRect);
             WriteSettings();
-
         }
 
         public override string SettingsCategory()
         {
             return "Crocamedelian's Exaction";
+        }
+
+        public override void WriteSettings()
+        {
+            base.WriteSettings();
+            LoadedModManager.GetMod<CrEMod>().GetSettings<Settings>().Write();
         }
     }
 
