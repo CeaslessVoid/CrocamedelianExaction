@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using MoreFactionInteraction;
+using UnityEngine;
 
 namespace CrocamedelianExaction
 {
@@ -82,6 +83,17 @@ namespace CrocamedelianExaction
         }
 
 
+    }
+
+    [HarmonyPatch(typeof(IncidentWorker_Extortion), "BaseChanceThisGame", MethodType.Getter)]
+    public static class Patch_IncidentWorker_Extortion_BaseChanceThisGame
+    {
+        public static void Postfix(ref float __result)
+        {
+            float chance_modifier = (float)Math.Round(Math.Exp(2 * ((1 / (1 + Mathf.Exp(-0.02f * CrE_GameComponent.CrE_Points))) - 0.5f)) - 1, 2);
+
+            __result += chance_modifier;
+        }
     }
 
 }
