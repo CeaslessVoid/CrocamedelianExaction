@@ -41,6 +41,7 @@ namespace CrocamedelianExaction
             {
                 CrE_GameComponent.CapturedPawnsQue = new List<Pawn>();
             }
+
         }
 
         public override void GameComponentTick() // Every day
@@ -99,7 +100,7 @@ namespace CrocamedelianExaction
             // Forces events to happen -----------------------------------------------------------------------------------------------
             float chance = 0.05f + (float)Math.Round(Math.Exp(2 * ((1 / (1 + Mathf.Exp(-0.02f * CrE_GameComponent.CrE_Points))) - 0.5f)) - 1, 2);
 
-            if (CrE_Pawn_Return_Time == -1 && Rand.Chance(Mathf.Clamp(chance, 0.0f, 1.0f)) && Find.TickManager.TicksGame >= 60000 * 15 && !has_pawn_out)
+            if (CrE_Pawn_Return_Time == -1 && Rand.Chance(Mathf.Clamp(chance, 0.0f, 1.0f)) && Find.TickManager.TicksGame >= 60000 * 15 && !has_pawn_out && Settings.CrE_PirateExtort)
             {
                 IncidentDef incidentDef = DefDatabase<IncidentDef>.GetNamed("CrE_PiratePawn_Extort", true);
 

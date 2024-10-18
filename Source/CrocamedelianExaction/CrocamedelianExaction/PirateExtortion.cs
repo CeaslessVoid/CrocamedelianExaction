@@ -33,7 +33,8 @@ namespace CrocamedelianExaction
             return base.CanFireNowSub(parms) && TryFindPirateLeader(out pirateLeader)
                                              && TryFindVictim(out victim)
                                              && !this.IsScenarioBlocked()
-                                             && !CrE_GameComponent.has_pawn_out;
+                                             && !CrE_GameComponent.has_pawn_out
+                                             && CrE_GameComponent.Settings.CrE_PirateExtort;
         }
 
         public override bool TryExecuteWorker(IncidentParms parms)
